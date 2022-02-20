@@ -5,6 +5,7 @@
 - [typescript](https://www.typescriptlang.org/docs/handbook/react.html)
 - Препроцессор [sass](https://sass-lang.com/documentation)
 - Библиотека пользовательского интерфейса [antd](https://ant.design/docs/react/introduce)
+- [axios](https://axios-http.com/docs/intro)
 
 ## Команды для запуска:
 
@@ -19,7 +20,7 @@
 ### `npm test`
 
 Запускает средство запуска тестов в интерактивном режиме просмотра.\
-Дополнительную информацию см. в разделе о [запуске тестов](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Дополнительную информацию см. в разделе о [запуске тестов](https://facebook.github.io/create-react-app/docs/running-tests).
 
 ### `npm run build`
 

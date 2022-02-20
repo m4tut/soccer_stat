@@ -2,6 +2,7 @@ declare module '*.css';
 declare module '*.scss';
 declare module '*.sass';
 declare module '*.less';
+declare module '*.tsx';
 
 declare module '*.jpeg' {
   const value: string;

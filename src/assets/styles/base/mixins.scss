@@ -29,3 +29,16 @@
     font-display: swap; // add this line
   }
 }
+
+// Media
+@mixin mediaMax($size) {
+  @media screen and (max-width: $size) {
+    @content;
+  }
+}
+
+@mixin mediaMin($size) {
+  @media screen and (min-width: $size) {
+    @content;
+  }
+}

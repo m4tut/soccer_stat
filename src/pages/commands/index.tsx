@@ -1,15 +1,15 @@
 import React, { FC } from 'react';
 
 // Components
-import { getLayout } from '~widgets/MainLayout';
 import { Container } from '~widgets/Container';
+import { getLayout } from '~widgets/MainLayout';
 
-const Leagues: FC = () => {
+const Commands: FC = () => {
   return getLayout(
     <Container>
-      Leagues
+      commands
     </Container>
    );
 }
 
-export default Leagues;
+export default Commands;

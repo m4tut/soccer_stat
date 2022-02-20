@@ -6,8 +6,10 @@ const resolvePath = p => path.resolve(__dirname, p);
 module.exports = {
   webpack: {
     alias: {
-      '@assets': resolvePath('./src/assets'),
-      '@pages': resolvePath('./src/pages'),
+      '~assets': resolvePath('./src/assets'),
+      '~pages': resolvePath('./src/pages'),
+      '~widgets': resolvePath('./src/widgets'),
+      '~shared': resolvePath('./src/shared'),
     },
   },
   plugins: [
