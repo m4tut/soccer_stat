@@ -37,6 +37,10 @@
       transition: width 0.3s;
     }
 
+    &:hover {
+      color: inherit;
+    }
+
     &:hover::after {
       width: 100%;
     }

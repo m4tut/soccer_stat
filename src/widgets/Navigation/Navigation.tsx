@@ -3,7 +3,7 @@ import { FC } from 'react';
 import cl from 'classnames';
 
 // Config
-import { INavItem } from '~shared/config/navigation/types';
+import { INavItem } from '~shared/navigation/types';
 
 // Styles
 import styles from './Navigation.module.scss';

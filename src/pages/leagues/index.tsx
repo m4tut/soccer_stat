@@ -1,11 +1,10 @@
 import React, { FC } from 'react';
 
 // Components
-import { getLayout } from '~widgets/MainLayout';
 import { Container } from '~widgets/Container';
 
 const Leagues: FC = () => {
-  return getLayout(
+  return (
     <Container>
       Leagues
     </Container>

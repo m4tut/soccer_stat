@@ -1,15 +1,15 @@
-import { lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
+import { routes } from '~shared/routes';
 
-const Leagues = lazy(() => import('./leagues'));
-const Commands = lazy(() => import('./commands'));
+// Components
+import { getLayout } from '~widgets/MainLayout';
 
 export const Routing = () => {
-  return (
+  return getLayout(
     <Routes>
-      <Route path='/' element={<Leagues />} />
-      <Route path='/commands' element={<Commands />} />
-      {/* <Route path="*" element={} /> */}
+      {routes.map((route) => (
+        <Route key={route.path} path={route.path} element={<route.elements />} />
+      ))}
     </Routes>
   );
 };

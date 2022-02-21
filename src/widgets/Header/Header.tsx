@@ -2,7 +2,7 @@ import { FC } from 'react';
 import cl from 'classnames';
 
 // Config
-import { navigationItems } from '~shared/config/navigation'
+import { navigationItems } from '~shared/navigation'
 
 // Components
 import { Container } from '~widgets/Container';
