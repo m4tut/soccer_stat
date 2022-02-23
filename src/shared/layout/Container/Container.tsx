@@ -1,9 +1,8 @@
 import { FC, ReactNode } from 'react';
 
-import cl from 'classnames';
-
 // Styles
-import classes from './Container.module.scss';
+import cl from 'classnames';
+import styles from './Container.module.scss';
 
 interface ContainerProps {
   className?: string;
@@ -11,5 +10,5 @@ interface ContainerProps {
 }
 
 export const Container: FC<ContainerProps> = ({ className, children }) => (
-  <div className={cl(className, classes.container)}>{children}</div>
+  <div className={cl(className, styles['container'])}>{children}</div>
 );

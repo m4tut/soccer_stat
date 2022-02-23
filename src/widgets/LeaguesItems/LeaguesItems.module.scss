@@ -1,0 +1,9 @@
+.leagues-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(30%, 1fr));
+  gap: 10px;
+
+  @include mediaMax($tablet) {
+    grid-template-columns: repeat(auto-fit, minmax(49%, 1fr));
+  }
+}

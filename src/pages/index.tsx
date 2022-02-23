@@ -2,7 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import { routes } from '~shared/routes';
 
 // Components
-import { getLayout } from '~widgets/MainLayout';
+import { getLayout } from '~shared/layout/MainLayout';
 
 export const Routing = () => {
   return getLayout(

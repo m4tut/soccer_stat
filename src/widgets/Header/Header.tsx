@@ -1,25 +1,28 @@
 import { FC } from 'react';
-import cl from 'classnames';
+import { Link } from 'react-router-dom';
 
 // Config
-import { navigationItems } from '~shared/navigation'
+import { navigationItems } from '~shared/ui/Navigation/model';
 
 // Components
-import { Container } from '~widgets/Container';
-import Navigation from '~widgets/Navigation/Navigation';
+import { Container } from '~shared/layout/Container';
+import Navigation from '~shared/ui/Navigation/Navigation';
 
 // Styles
+import cl from 'classnames';
 import styles from './Header.module.scss';
 
 interface HeaderProps {
-  className?: string,
+  className?: string;
 }
 
-export const Header: FC<HeaderProps> = ({className}) => {
+export const Header: FC<HeaderProps> = ({ className }) => {
   return (
-    <header className={cl(className, styles['header'])} >
+    <header className={cl(className, styles['header'])}>
       <Container className={cl(styles['header__content'])}>
-        <img className={cl(styles['header__content-logo'])} src={require('~assets/img/logo.png')} alt='logo' />
+        <Link to='/'>
+          <img className={cl(styles['header__content-logo'])} src={require('~assets/img/logo.png')} alt='logo' />
+        </Link>
 
         <Navigation navigationItems={navigationItems} />
       </Container>

@@ -10,6 +10,9 @@ module.exports = {
       '~pages': resolvePath('./src/pages'),
       '~widgets': resolvePath('./src/widgets'),
       '~shared': resolvePath('./src/shared'),
+      '~entities': resolvePath('./src/entities'),
+      '~features': resolvePath('./src/features'),
+      '~processes': resolvePath('./src/processes'),
     },
   },
   plugins: [
