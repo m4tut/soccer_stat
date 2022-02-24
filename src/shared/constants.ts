@@ -1,5 +1,7 @@
 export const LOADING_TEXT: string = 'Загрузка...'
 
+export const SEARCH_WARNING_MESSAGE = 'К сожалению по вашему запросу ничего не найдено...'
+
 export const LIMIT_LEAGUES_PAGE: number = 12;
 
 export const BASE_URL_API: string = 'http://api.football-data.org/v2';

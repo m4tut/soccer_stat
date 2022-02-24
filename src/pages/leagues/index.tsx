@@ -1,11 +1,11 @@
-import { FC, FormEvent, useEffect, useState } from 'react';
+import { FC, useEffect, useMemo, useState } from 'react';
 
 // API
 import { LeaguesAPI } from '~pages/leagues/api';
 import { ILeaguesData } from '~pages/leagues/api/types';
 
 // Config
-import { LIMIT_LEAGUES_PAGE } from '~shared/constants';
+import { LIMIT_LEAGUES_PAGE, SEARCH_WARNING_MESSAGE } from '~shared/constants';
 import { defaultValueSelect, optionsSelect, placeholderInput } from './model/searchSettings';
 
 // Hooks
@@ -18,7 +18,7 @@ import { LeaguesItems } from '~widgets/LeaguesItems';
 import { Loading } from '~shared/layout/Loading';
 import { PageSearch } from '~features/PageSearch';
 import { MySelect } from '~shared/ui/MySelect';
-
+import { Alert } from 'antd';
 
 const Leagues: FC = () => {
   const [leagues, setLeagues] = useState<ILeaguesData[]>([]); // все лиги
@@ -26,7 +26,7 @@ const Leagues: FC = () => {
   const [page, setPage] = useState<ILeaguesData[]>([]); // лиги на текущей странице
   const [numPage, setNumPage] = useState<number>(0); // номер текущей страницы (индексация страниц с 0)
 
-  const [value, setValue] = useState<string>(); // состояние инпута
+  const [value, setValue] = useState<string>(''); // состояние инпута
   const [option, setOption] = useState<string>(defaultValueSelect); // состояние селекта
 
   // получить все лиги
@@ -42,15 +42,32 @@ const Leagues: FC = () => {
     setPage(data.slice(numPage * LIMIT_LEAGUES_PAGE, numPage * LIMIT_LEAGUES_PAGE + LIMIT_LEAGUES_PAGE));
   }
 
+  // фильтрация
+  function filters(data: ILeaguesData[]): ILeaguesData[] {
+    switch (option) {
+      case optionsSelect[0].value:
+        data = data.filter(item => item.name.toLowerCase().includes(value));
+        break;
+
+      case optionsSelect[1].value:
+        data = data.filter(item => item.area.name.toLowerCase().includes(value));
+        break;
+    }
+
+    return data;
+  }
+
   const [fetchLeaguesAll, isLoading, leaguesError] = useFetching(fetchLeagues);
 
   useEffect(() => {
     fetchLeaguesAll();
   }, []);
 
-  useEffect(() => {
-    fetchLeaguesPage(leagues);
-  }, [numPage]);
+  useMemo(() => {
+    const data: ILeaguesData[] = filters(leagues);
+    setLeaguesLenght(data.length);
+    fetchLeaguesPage(data);
+  }, [numPage, value, option]);
 
   return (
     <Container>
@@ -60,7 +77,7 @@ const Leagues: FC = () => {
             <MySelect defaultValue={option} options={optionsSelect} onChange={setOption} />
           </PageSearch>
 
-          <LeaguesItems data={page} />
+          {page.length ? <LeaguesItems data={page} /> : <Alert message={SEARCH_WARNING_MESSAGE} type="warning" showIcon closable />}
         </Viewer>
       </Loading>
     </Container>

@@ -20,15 +20,20 @@ export const Viewer: FC<ViewerProps> = ({ className, children, onChange, totalCo
     <div className={cl(className, styles['viewer'])}>
       <div className={cl(styles['viewer__content'])}>{children}</div>
 
-      <div className={cl(styles['viewer__pagination'])}>
-        <Pagination
-          onChange={num => onChange(num - 1)}
-          defaultCurrent={1}
-          showSizeChanger={false}
-          defaultPageSize={defaultPageSize}
-          total={totalCountElem}
-        />
-      </div>
+      {totalCountElem > defaultPageSize ? (
+        <div className={cl(styles['viewer__pagination'])}>
+          <Pagination
+            responsive={true}
+            onChange={num => onChange(num - 1)}
+            defaultCurrent={1}
+            showSizeChanger={false}
+            defaultPageSize={defaultPageSize}
+            total={totalCountElem}
+          />
+        </div>
+      ) : (
+        ''
+      )}
     </div>
   );
 };

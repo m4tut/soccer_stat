@@ -1,12 +1,12 @@
-import { FC, FormEvent, ReactNode } from 'react';
+import { FC, ReactNode } from 'react';
 
 // Components
 import { Input } from 'antd';
+import Search from 'antd/lib/input/Search';
 
 // Styles
 import cl from 'classnames';
 import styles from './PageSearch.module.scss';
-import Search from 'antd/lib/input/Search';
 
 interface PageSearchProps {
   className?: string;
