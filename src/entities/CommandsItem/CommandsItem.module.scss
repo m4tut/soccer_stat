@@ -1,0 +1,22 @@
+.commands-item {
+  padding: 10px;
+  border-radius: 4px;
+
+  transition: box-shadow .3s, background-color .3s;
+
+  &:hover {
+    cursor: pointer;
+    background-color: rgba($background-color-accent, 0.05);
+    box-shadow: 0 0 20px rgba($shadow-color-default, 0.05);
+  }
+
+  &__img {
+    margin-top: 10px;
+    object-fit: contain;
+    max-height: 230px;
+
+    @include mediaMax($mobile) {
+      max-height: 160px;
+    }
+  }
+}

@@ -2,11 +2,11 @@ import { FC, useEffect, useMemo, useState } from 'react';
 
 // API
 import { LeaguesAPI } from '~pages/leagues/api';
-import { ILeaguesData } from '~pages/leagues/api/types';
 
 // Config
-import { LIMIT_LEAGUES_PAGE, SEARCH_WARNING_MESSAGE } from '~shared/constants';
-import { defaultValueSelect, optionsSelect, placeholderInput } from './model/searchSettings';
+import { LIMIT_LEAGUES_PAGE, PLACEHOLDER_INPUT_SEARCH, SEARCH_WARNING_MESSAGE } from '~shared/constants';
+import { defaultValueSelect, optionsSelect } from './model/searchSettings';
+import { ILeaguesData } from '~pages/leagues/model/types';
 
 // Hooks
 import { useFetching } from '~shared/hooks/useFetching';
@@ -73,7 +73,7 @@ const Leagues: FC = () => {
     <Container>
       <Loading isLoading={isLoading} error={leaguesError}>
         <Viewer onChange={setNumPage} defaultPageSize={LIMIT_LEAGUES_PAGE} totalCountElem={leaguesLenght}>
-          <PageSearch placeholder={placeholderInput} onSearch={setValue}>
+          <PageSearch placeholder={PLACEHOLDER_INPUT_SEARCH} onSearch={setValue}>
             <MySelect defaultValue={option} options={optionsSelect} onChange={setOption} />
           </PageSearch>
 

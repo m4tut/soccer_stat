@@ -1,0 +1,9 @@
+.commands-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20%, 1fr));
+  gap: 15px;
+
+  @include mediaMax($tablet) {
+    grid-template-columns: repeat(auto-fit, minmax(48%, 1fr));
+  }
+}

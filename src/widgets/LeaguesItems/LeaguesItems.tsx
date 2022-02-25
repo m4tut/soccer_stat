@@ -2,12 +2,12 @@ import { FC } from 'react';
 import { useNavigate } from 'react-router';
 
 // Config
-import { ILeaguesData } from '~pages/leagues/api/types';
+import { ILeaguesData } from '~pages/leagues/model/types';
 
 // Styles
 import cl from 'classnames';
 import styles from './LeaguesItems.module.scss';
-import { LeaguesItem } from '~entities/LeaguesItem/LeaguesItem';
+import { LeaguesItem } from '~entities/LeaguesItem';
 
 
 interface LeaguesItemsProps {
