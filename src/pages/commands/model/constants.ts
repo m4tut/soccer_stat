@@ -1,0 +1,1 @@
+export const LIMIT_COMANDS_PAGE: number = 8;

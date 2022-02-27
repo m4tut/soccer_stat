@@ -1,7 +1,7 @@
 import { FC, ReactNode, Suspense } from 'react';
 
 // Config
-import { LOADING_TEXT } from '~shared/constants';
+import { LOADING_TEXT } from '~shared/constants/message';
 
 // Components
 import { Header } from '~widgets/Header';

@@ -4,7 +4,8 @@ import { FC, useEffect, useMemo, useState } from 'react';
 import { LeaguesAPI } from '~pages/leagues/api';
 
 // Config
-import { LIMIT_LEAGUES_PAGE, PLACEHOLDER_INPUT_SEARCH, SEARCH_WARNING_MESSAGE } from '~shared/constants';
+import { LIMIT_LEAGUES_PAGE } from './model/constants';
+import { PLACEHOLDER_INPUT_SEARCH, SEARCH_WARNING_MESSAGE } from '~shared/constants/message';
 import { defaultValueSelect, optionsSelect } from './model/searchSettings';
 import { ILeaguesData } from '~pages/leagues/model/types';
 

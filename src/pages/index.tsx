@@ -1,5 +1,5 @@
-import { Routes, Route } from 'react-router-dom';
-import { routes } from '~shared/routes';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import { routes, routesRedirect } from '~shared/routes';
 
 // Components
 import { getLayout } from '~shared/layout/MainLayout';
@@ -7,7 +7,10 @@ import { getLayout } from '~shared/layout/MainLayout';
 export const Routing = () => {
   return getLayout(
     <Routes>
-      {routes.map((route) => (
+      {routesRedirect.map(route => (
+        <Route key={route.pathFrom} path={route.pathFrom} element={ <Navigate to={route.pathTo} />} />
+      ))}
+      {routes.map(route => (
         <Route key={route.path} path={route.path} element={<route.elements />} />
       ))}
     </Routes>

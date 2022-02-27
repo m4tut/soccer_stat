@@ -1,17 +1,29 @@
 import { lazy } from 'react';
-import { IRoutes } from './types';
+import { IRoutes, IRoutesRedirect } from './types';
 
 // Pages
 const Leagues = lazy(() => import('~pages/leagues'));
+const LeaguesId = lazy(() => import('~pages/leagues/leaguesId'));
 const Commands = lazy(() => import('~pages/commands'));
 
 export const routes: IRoutes[] = [
   {
-    path: "/",
-    elements: Leagues
+    path: '/leagues',
+    elements: Leagues,
   },
   {
-    path: "/commands",
-    elements: Commands
+    path: '/leagues/:id',
+    elements: LeaguesId,
   },
-]
+  {
+    path: '/commands',
+    elements: Commands,
+  },
+];
+
+export const routesRedirect: IRoutesRedirect[] = [
+  {
+    pathFrom: '/',
+    pathTo: '/leagues',
+  },
+];

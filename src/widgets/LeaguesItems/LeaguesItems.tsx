@@ -20,7 +20,7 @@ export const LeaguesItems: FC<LeaguesItemsProps> = ({ data, className }) => {
   return (
     <div className={cl(className, styles['leagues-items'])}>
       {data.map(item => (
-        <LeaguesItem key={item.id} name={item.name} country={item.area.name} onClick={() => navigate('/' + item.id)} />
+        <LeaguesItem key={item.id} name={item.name} country={item.area.name} onClick={() => navigate('/leagues/' + item.id)} />
       ))}
     </div>
   );

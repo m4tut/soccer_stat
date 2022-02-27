@@ -4,7 +4,8 @@ import { FC, useEffect, useMemo, useState } from 'react';
 import { CommandsAPI } from './api';
 
 // Config
-import { LIMIT_COMANDS_PAGE, PLACEHOLDER_INPUT_SEARCH, SEARCH_WARNING_MESSAGE } from '~shared/constants';
+import { LIMIT_COMANDS_PAGE } from './model/constants';
+import { PLACEHOLDER_INPUT_SEARCH, SEARCH_WARNING_MESSAGE } from '~shared/constants/message';
 import { ICommandsData } from './model/types';
 
 // Hooks

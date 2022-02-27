@@ -2,7 +2,7 @@ import axios from 'axios';
 import { ICommands } from '../model/types';
 
 // Config
-import { INSTANCE_API } from '~shared/constants';
+import { INSTANCE_API } from '~shared/constants/api';
 
 const instance = axios.create(INSTANCE_API);
 

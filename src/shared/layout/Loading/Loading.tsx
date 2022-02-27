@@ -1,7 +1,7 @@
 import { FC, Fragment, ReactNode } from 'react';
 
 // Config
-import { LOADING_TEXT } from '~shared/constants';
+import { LOADING_TEXT } from '~shared/constants/message';
 
 // Components
 import { Alert, Spin } from 'antd';
