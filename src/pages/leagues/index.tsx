@@ -6,8 +6,8 @@ import { LeaguesAPI } from '~pages/leagues/api';
 // Config
 import { LIMIT_LEAGUES_PAGE } from './model/constants';
 import { PLACEHOLDER_INPUT_SEARCH, SEARCH_WARNING_MESSAGE } from '~shared/constants/message';
-import { defaultValueSelect, optionsSelect } from './model/searchSettings';
 import { ILeaguesData } from '~pages/leagues/model/types';
+import { IOptions } from '~shared/ui/MySelect/types';
 
 // Hooks
 import { useFetching } from '~shared/hooks/useFetching';
@@ -21,6 +21,14 @@ import { PageSearch } from '~features/PageSearch';
 import { MySelect } from '~shared/ui/MySelect';
 import { Alert } from 'antd';
 
+// Constants
+const DEFAULT_VALUE_SELECT: string = 'league';
+
+const OPTIONS_SELECT: IOptions[] = [
+  { text: 'Лига', value: 'league' },
+  { text: 'Страна', value: 'country' },
+];
+
 const Leagues: FC = () => {
   const [leagues, setLeagues] = useState<ILeaguesData[]>([]); // все лиги
   const [leaguesLenght, setLeaguesLenght] = useState<number>(0); // количество лиг
@@ -28,7 +36,7 @@ const Leagues: FC = () => {
   const [numPage, setNumPage] = useState<number>(0); // номер текущей страницы (индексация страниц с 0)
 
   const [value, setValue] = useState<string>(''); // состояние инпута
-  const [option, setOption] = useState<string>(defaultValueSelect); // состояние селекта
+  const [option, setOption] = useState<string>(DEFAULT_VALUE_SELECT); // состояние селекта
 
   // получить все лиги
   async function fetchLeagues() {
@@ -46,11 +54,11 @@ const Leagues: FC = () => {
   // фильтрация
   function filters(data: ILeaguesData[]): ILeaguesData[] {
     switch (option) {
-      case optionsSelect[0].value:
+      case OPTIONS_SELECT[0].value:
         data = data.filter(item => item.name.toLowerCase().includes(value));
         break;
 
-      case optionsSelect[1].value:
+      case OPTIONS_SELECT[1].value:
         data = data.filter(item => item.area.name.toLowerCase().includes(value));
         break;
     }
@@ -75,7 +83,7 @@ const Leagues: FC = () => {
       <Loading isLoading={isLoading} error={leaguesError}>
         <Viewer onChange={setNumPage} defaultPageSize={LIMIT_LEAGUES_PAGE} totalCountElem={leaguesLenght}>
           <PageSearch placeholder={PLACEHOLDER_INPUT_SEARCH} onSearch={setValue}>
-            <MySelect defaultValue={option} options={optionsSelect} onChange={setOption} />
+            <MySelect defaultValue={option} options={OPTIONS_SELECT} onChange={setOption} />
           </PageSearch>
 
           {page.length ? <LeaguesItems data={page} /> : <Alert message={SEARCH_WARNING_MESSAGE} type="warning" showIcon closable />}

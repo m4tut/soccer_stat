@@ -1,0 +1,79 @@
+.matches-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+
+  border: 1px solid rgba($border-color-default, .3);
+  border-radius: 8px;
+
+  @include mediaMax($tablet) {
+    flex-wrap: wrap;
+  }
+
+  &__time {
+    width: 100%;
+    max-width: 200px;
+    margin-right: 15px;
+    text-align: start;
+
+    @include mediaMax($laptop) {
+      max-width: 140px;
+    }
+
+    @include mediaMax($tablet) {
+      margin-right: 0;
+    }
+  }
+
+  &__status {
+    cursor: default;
+    padding: 4px 10px;
+    background-color: $background-color-basic;
+    border-radius: 4px;
+    margin-right: 20px;
+
+    font-size: 14px;
+    color: $text-color-basic;
+    text-transform: uppercase;
+
+    @include mediaMax($tablet) {
+      margin-right: 0;
+    }
+  }
+
+  &__comands {
+    display: grid;
+    grid-template-columns: 1fr 25px 1fr;
+    width: 100%;
+    max-width: 520px;
+    margin-right: 20px;
+
+    &-left {
+      text-align: right;
+    }
+
+    &-right {
+      text-align: left;
+    }
+
+    @include mediaMax($tablet) {
+      display: block;
+      text-align: center;
+      margin: 7px 0;
+    }
+  }
+
+  &__score {
+    display: flex;
+
+    & + & {
+      margin-left: 8px;
+    }
+
+    &--faded {
+      color: rgba($text-color-default, .7);
+    }
+  }
+}

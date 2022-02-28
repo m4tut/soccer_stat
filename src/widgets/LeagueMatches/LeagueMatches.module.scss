@@ -1,0 +1,16 @@
+.league-matches {
+  display: grid;
+  grid-template-columns: 1fr;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+
+  @include mediaMax($tablet) {
+    align-items: start;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @include mediaMax($mobile) {
+    grid-template-columns: 1fr;
+  }
+}
