@@ -17,10 +17,7 @@ function usePagination<T>(
   // получить данные для страницы (пагинация)
   async function fetchPage(data: T[]) {
     setDataLenght(data.length);
-    console.log(data);
-
     setPage(data.slice(numPage * limit, numPage * limit + limit));
-    console.log(page);
   }
 
   return [page, dataLenght, numPage, setNumPage, fetchPage];

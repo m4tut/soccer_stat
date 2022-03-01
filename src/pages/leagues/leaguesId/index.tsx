@@ -5,7 +5,7 @@ import { useParams } from 'react-router';
 import { LeaguesAPI } from '../api';
 
 // Config
-import { ILeaguesMatchesData } from '../model/types';
+import { ILeaguesId, ILeaguesMatchesData } from '../model/types';
 import { LIMIT_MATCHES_PAGE } from '../model/constants';
 
 // Hooks
@@ -22,18 +22,20 @@ import { Loading } from '~shared/layout/Loading';
 import { Viewer } from '~shared/layout/Viewer';
 import { LeagueMatches } from '~widgets/LeagueMatches';
 import Title from 'antd/lib/typography/Title';
+import { MyBreadcrumb } from '~shared/ui/MyBreadcrumb';
+import { IBreadcrumb } from '~shared/ui/MyBreadcrumb/types';
 
 const LeaguesId: FC = () => {
   const { id = '' } = useParams<{ id: string }>();
 
-  const [leaguesId, setLeaguesId] = useState<ILeaguesMatchesData[]>([]); // матчи лиги
+  const [leaguesId, setLeaguesId] = useState<ILeaguesId>(); // матчи лиги
   const [page, leaguesIdLenght, numPage, setNumPage, fetchMatchesPage] =
     usePagination<ILeaguesMatchesData>(LIMIT_MATCHES_PAGE);
 
   // получить данные конкретной лиги
   async function fetchLeagues() {
     const data = await LeaguesAPI.getLeaguesId(id);
-    setLeaguesId(data.matches);
+    setLeaguesId(data);
     fetchMatchesPage(data.matches);
   }
 
@@ -44,7 +46,7 @@ const LeaguesId: FC = () => {
   }, []);
 
   useMemo(() => {
-    const data: ILeaguesMatchesData[] = leaguesId;
+    const data: ILeaguesMatchesData[] = leaguesId?.matches!;
     fetchMatchesPage(data);
   }, [numPage]);
 
@@ -52,10 +54,23 @@ const LeaguesId: FC = () => {
   //   setNumPage(0);
   // }, []);
 
+  // Constants
+  const BREADCRUMBS: IBreadcrumb[] = [
+    {
+      text: 'Лиги',
+      link: '/leagues',
+    },
+    {
+      text: leaguesId?.competition.name!,
+    },
+  ];
+
   return (
     <Container className={cl(styles['leagues-id'])}>
       <Loading isLoading={isLoading} error={errorLeaguesId}>
         <Viewer onChange={setNumPage} defaultPageSize={LIMIT_MATCHES_PAGE} totalCountElem={leaguesIdLenght}>
+          <MyBreadcrumb className={cl(styles['leagues-id__breadcrumb'])} breadcrumbs={BREADCRUMBS} />
+
           <Title className={cl(styles['leagues-id__title'])}>Матчи</Title>
           <LeagueMatches data={page} />
         </Viewer>

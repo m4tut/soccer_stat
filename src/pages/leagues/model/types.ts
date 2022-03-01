@@ -36,6 +36,6 @@ export interface ILeagues {
 
 export interface ILeaguesId {
   count: number;
-  competitions: ILeaguesData;
+  competition: ILeaguesData;
   matches: ILeaguesMatchesData[];
 }

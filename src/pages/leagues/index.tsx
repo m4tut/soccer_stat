@@ -22,15 +22,15 @@ import { PageSearch } from '~features/PageSearch';
 import { MySelect } from '~shared/ui/MySelect';
 import { Alert } from 'antd';
 
-// Constants
-const DEFAULT_VALUE_SELECT: string = 'league';
-
-const OPTIONS_SELECT: IOptions[] = [
-  { text: 'Лига', value: 'league' },
-  { text: 'Страна', value: 'country' },
-];
-
 const Leagues: FC = () => {
+  // Constants
+  const DEFAULT_VALUE_SELECT: string = 'league';
+
+  const OPTIONS_SELECT: IOptions[] = [
+    { text: 'Лига', value: 'league' },
+    { text: 'Страна', value: 'country' },
+  ];
+
   const [leagues, setLeagues] = useState<ILeaguesData[]>([]); // все лиги
   const [page, leaguesLenght, numPage, setNumPage, fetchLeaguesPage] = usePagination<ILeaguesData>(LIMIT_LEAGUES_PAGE);
 

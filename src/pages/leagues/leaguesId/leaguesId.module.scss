@@ -4,4 +4,9 @@
     font-size: 34px;
     text-align: start;
   }
+
+  & &__breadcrumb {
+    text-align: start;
+    margin-bottom: 8px;
+  }
 }
