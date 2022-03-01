@@ -18,7 +18,6 @@ interface CommandsItemsProps {
 
 export const CommandsItems: FC<CommandsItemsProps> = ({ data, className }) => {
   const navigate = useNavigate();
-  console.log(data);
 
   return (
     <div className={cl(className, styles['commands-items'])}>

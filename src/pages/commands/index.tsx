@@ -10,6 +10,7 @@ import { ICommandsData } from './model/types';
 
 // Hooks
 import { useFetching } from '~shared/hooks/useFetching';
+import usePagination from '~shared/hooks/usePagination';
 
 // Components
 import { Container } from '~shared/layout/Container';
@@ -19,12 +20,10 @@ import { Alert } from 'antd';
 import { PageSearch } from '~features/PageSearch';
 import { CommandsItems } from '~widgets/CommandsItems';
 
-
 const Commands: FC = () => {
-  const [commands, setCommands] = useState<ICommandsData[]>([]); // все лиги
-  const [commandsLenght, setCommandsLenght] = useState<number>(0); // количество лиг
-  const [page, setPage] = useState<ICommandsData[]>([]); // лиги на текущей странице
-  const [numPage, setNumPage] = useState<number>(0); // номер текущей страницы (индексация страниц с 0)
+  const [commands, setCommands] = useState<ICommandsData[]>([]); // все команды
+  const [page, commandsLenght, numPage, setNumPage, fetchCommandsPage] =
+    usePagination<ICommandsData>(LIMIT_COMANDS_PAGE);
 
   const [value, setValue] = useState<string>(''); // состояние инпута
 
@@ -32,13 +31,7 @@ const Commands: FC = () => {
   async function fetchCommands() {
     const data = await CommandsAPI.getAllCommands();
     setCommands(data.teams);
-    setCommandsLenght(data.count);
     fetchCommandsPage(data.teams);
-  }
-
-  // получить лиги для страницы (пагинация)
-  async function fetchCommandsPage(data: ICommandsData[]) {
-    setPage(data.slice(numPage * LIMIT_COMANDS_PAGE, numPage * LIMIT_COMANDS_PAGE + LIMIT_COMANDS_PAGE));
   }
 
   // фильтрация
@@ -54,17 +47,23 @@ const Commands: FC = () => {
 
   useMemo(() => {
     const data: ICommandsData[] = filters(commands);
-    setCommandsLenght(data.length);
     fetchCommandsPage(data);
   }, [numPage, value]);
+
+  useMemo(() => {
+    setNumPage(0);
+  }, [value]);
 
   return (
     <Container>
       <Loading isLoading={isLoading} error={commandsError}>
         <Viewer onChange={setNumPage} defaultPageSize={LIMIT_COMANDS_PAGE} totalCountElem={commandsLenght}>
-          <PageSearch placeholder={PLACEHOLDER_INPUT_SEARCH} onSearch={setValue}>
-          </PageSearch>
-          {page.length ? <CommandsItems data={page} /> : <Alert message={SEARCH_WARNING_MESSAGE} type="warning" showIcon closable />}
+          <PageSearch placeholder={PLACEHOLDER_INPUT_SEARCH} onSearch={setValue}></PageSearch>
+          {page.length ? (
+            <CommandsItems data={page} />
+          ) : (
+            <Alert message={SEARCH_WARNING_MESSAGE} type='warning' showIcon closable />
+          )}
         </Viewer>
       </Loading>
     </Container>

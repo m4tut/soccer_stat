@@ -11,6 +11,7 @@ import { IOptions } from '~shared/ui/MySelect/types';
 
 // Hooks
 import { useFetching } from '~shared/hooks/useFetching';
+import usePagination from '~shared/hooks/usePagination';
 
 // Components
 import { Container } from '~shared/layout/Container';
@@ -31,9 +32,7 @@ const OPTIONS_SELECT: IOptions[] = [
 
 const Leagues: FC = () => {
   const [leagues, setLeagues] = useState<ILeaguesData[]>([]); // все лиги
-  const [leaguesLenght, setLeaguesLenght] = useState<number>(0); // количество лиг
-  const [page, setPage] = useState<ILeaguesData[]>([]); // лиги на текущей странице
-  const [numPage, setNumPage] = useState<number>(0); // номер текущей страницы (индексация страниц с 0)
+  const [page, leaguesLenght, numPage, setNumPage, fetchLeaguesPage] = usePagination<ILeaguesData>(LIMIT_LEAGUES_PAGE);
 
   const [value, setValue] = useState<string>(''); // состояние инпута
   const [option, setOption] = useState<string>(DEFAULT_VALUE_SELECT); // состояние селекта
@@ -42,13 +41,7 @@ const Leagues: FC = () => {
   async function fetchLeagues() {
     const data = await LeaguesAPI.getAllLeagues();
     setLeagues(data.competitions);
-    setLeaguesLenght(data.count);
     fetchLeaguesPage(data.competitions);
-  }
-
-  // получить лиги для страницы (пагинация)
-  async function fetchLeaguesPage(data: ILeaguesData[]) {
-    setPage(data.slice(numPage * LIMIT_LEAGUES_PAGE, numPage * LIMIT_LEAGUES_PAGE + LIMIT_LEAGUES_PAGE));
   }
 
   // фильтрация
@@ -74,9 +67,12 @@ const Leagues: FC = () => {
 
   useMemo(() => {
     const data: ILeaguesData[] = filters(leagues);
-    setLeaguesLenght(data.length);
     fetchLeaguesPage(data);
   }, [numPage, value, option]);
+
+  useMemo(() => {
+    setNumPage(0);
+  }, [value, option]);
 
   return (
     <Container>
@@ -86,7 +82,11 @@ const Leagues: FC = () => {
             <MySelect defaultValue={option} options={OPTIONS_SELECT} onChange={setOption} />
           </PageSearch>
 
-          {page.length ? <LeaguesItems data={page} /> : <Alert message={SEARCH_WARNING_MESSAGE} type="warning" showIcon closable />}
+          {page.length ? (
+            <LeaguesItems data={page} />
+          ) : (
+            <Alert message={SEARCH_WARNING_MESSAGE} type='warning' showIcon closable />
+          )}
         </Viewer>
       </Loading>
     </Container>

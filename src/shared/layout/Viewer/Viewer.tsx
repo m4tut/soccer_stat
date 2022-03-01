@@ -13,9 +13,17 @@ interface ViewerProps {
   onChange: (num: number) => void;
   defaultPageSize: number;
   totalCountElem: number;
+  defaultCurrent?: number;
 }
 
-export const Viewer: FC<ViewerProps> = ({ className, children, onChange, totalCountElem, defaultPageSize }) => {
+export const Viewer: FC<ViewerProps> = ({
+  className,
+  children,
+  onChange,
+  totalCountElem,
+  defaultPageSize,
+  defaultCurrent = 1,
+}) => {
   return (
     <div className={cl(className, styles['viewer'])}>
       <div className={cl(styles['viewer__content'])}>{children}</div>
@@ -25,7 +33,7 @@ export const Viewer: FC<ViewerProps> = ({ className, children, onChange, totalCo
           <Pagination
             responsive={true}
             onChange={num => onChange(num - 1)}
-            defaultCurrent={1}
+            defaultCurrent={defaultCurrent}
             showSizeChanger={false}
             defaultPageSize={defaultPageSize}
             total={totalCountElem}
