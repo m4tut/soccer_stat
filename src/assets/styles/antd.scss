@@ -1,0 +1,6 @@
+.ant-picker-panels {
+  @include mediaMax($mobile) {
+    display: flex;
+    flex-direction: column;
+  }
+}

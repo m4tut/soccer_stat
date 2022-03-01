@@ -13,9 +13,15 @@ export class LeaguesAPI {
     return response.data;
   }
 
-  // получить конкретную лигу
+  // получить матчи лиги
   static async getLeaguesId(id: string) {
     const response = await instance.get<ILeaguesId>(`/competitions/${id}/matches`);
+    return response.data;
+  }
+
+  // получить матчи лиги из интервала дат
+  static async getLeaguesIdDateRange(id: string, dateStart: string, dateEnd: string) {
+    const response = await instance.get<ILeaguesId>(`/competitions/${id}/matches?dateFrom=${dateStart}&dateTo=${dateEnd}`);
     return response.data;
   }
 }

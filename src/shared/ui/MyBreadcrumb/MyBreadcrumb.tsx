@@ -18,8 +18,8 @@ interface BreadcrumbProps {
 export const MyBreadcrumb: FC<BreadcrumbProps> = ({ className, breadcrumbs }) => {
   return (
     <Breadcrumb className={cl(className)}>
-      {breadcrumbs.map(breadcrumb => (
-        <Breadcrumb.Item>
+      {breadcrumbs.map((breadcrumb, i) => (
+        <Breadcrumb.Item key={breadcrumb + '_' + i}>
           {breadcrumb.link !== undefined ? <Link to={breadcrumb.link}>{breadcrumb.text}</Link> : breadcrumb.text}
         </Breadcrumb.Item>
       ))}

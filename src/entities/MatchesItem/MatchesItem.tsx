@@ -26,14 +26,14 @@ interface MatchesItemProps {
 
 export const MatchesItem: FC<MatchesItemProps> = ({ className, data }) => {
   // получаем локальное время
-  const localeDate = new Date(data.utcDate);
+  const date = new Date(data.utcDate);
 
   return (
     <div className={cl(className, styles['matches-item'])}>
       <time className={cl(styles['matches-item__time'])} dateTime={data.utcDate}>
-        {localeDate.toLocaleString('ru', { year: 'numeric', month: '2-digit', day: '2-digit' }) +
+        {date.toLocaleString('ru', { year: 'numeric', month: '2-digit', day: '2-digit' }) +
           ' ' +
-          localeDate.toLocaleString('ru', { hour: '2-digit', minute: '2-digit' })}
+          date.toLocaleString('ru', { hour: '2-digit', minute: '2-digit' })}
       </time>
 
       <div className={cl(styles['matches-item__status'])}>

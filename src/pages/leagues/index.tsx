@@ -77,7 +77,12 @@ const Leagues: FC = () => {
   return (
     <Container>
       <Loading isLoading={isLoading} error={leaguesError}>
-        <Viewer onChange={setNumPage} defaultPageSize={LIMIT_LEAGUES_PAGE} totalCountElem={leaguesLenght}>
+        <Viewer
+          onChange={setNumPage}
+          current={numPage + 1}
+          defaultPageSize={LIMIT_LEAGUES_PAGE}
+          totalCountElem={leaguesLenght}
+        >
           <PageSearch placeholder={PLACEHOLDER_INPUT_SEARCH} onSearch={setValue}>
             <MySelect defaultValue={option} options={OPTIONS_SELECT} onChange={setOption} />
           </PageSearch>

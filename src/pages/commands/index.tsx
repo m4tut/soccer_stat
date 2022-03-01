@@ -57,7 +57,12 @@ const Commands: FC = () => {
   return (
     <Container>
       <Loading isLoading={isLoading} error={commandsError}>
-        <Viewer onChange={setNumPage} defaultPageSize={LIMIT_COMANDS_PAGE} totalCountElem={commandsLenght}>
+        <Viewer
+          onChange={setNumPage}
+          current={numPage + 1}
+          defaultPageSize={LIMIT_COMANDS_PAGE}
+          totalCountElem={commandsLenght}
+        >
           <PageSearch placeholder={PLACEHOLDER_INPUT_SEARCH} onSearch={setValue}></PageSearch>
           {page.length ? (
             <CommandsItems data={page} />

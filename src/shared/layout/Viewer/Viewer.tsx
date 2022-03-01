@@ -14,6 +14,7 @@ interface ViewerProps {
   defaultPageSize: number;
   totalCountElem: number;
   defaultCurrent?: number;
+  current?: number;
 }
 
 export const Viewer: FC<ViewerProps> = ({
@@ -23,6 +24,7 @@ export const Viewer: FC<ViewerProps> = ({
   totalCountElem,
   defaultPageSize,
   defaultCurrent = 1,
+  current,
 }) => {
   return (
     <div className={cl(className, styles['viewer'])}>
@@ -37,6 +39,7 @@ export const Viewer: FC<ViewerProps> = ({
             showSizeChanger={false}
             defaultPageSize={defaultPageSize}
             total={totalCountElem}
+            current={current}
           />
         </div>
       ) : (
