@@ -7,7 +7,7 @@
 - Библиотека пользовательского интерфейса [antd](https://ant.design/docs/react/introduce)
 - [axios](https://axios-http.com/docs/intro)
 
-## Команды для запуска:
+## Команды:
 
 ### `npm start`
 
