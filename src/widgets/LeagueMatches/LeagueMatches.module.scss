@@ -4,6 +4,7 @@
   flex-direction: column;
   align-items: center;
   gap: 15px;
+  padding: 0;
 
   @include mediaMax($tablet) {
     align-items: start;

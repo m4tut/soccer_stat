@@ -10,3 +10,8 @@ export interface ICommands {
   count: number;
   teams: ICommandsData[];
 }
+
+export interface ICommandsId {
+  count: number;
+  matches: IMatchesData[];
+}

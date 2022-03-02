@@ -42,10 +42,11 @@ const ComandsId: FC = () => {
 
   // получить матчи конкретной лиги
   async function fetchComands() {
-    const data = await CommandsAPI.getCommandMatches(id);
+    const data = await CommandsAPI.getCommandId(id);
+    const nameComand = await CommandsAPI.getCommandNameId(id);
     setComandsId(data.matches);
     fetchMatchesPage(data.matches);
-    // setNameComandsId(data.competition.name);
+    setNameComandsId(nameComand);
   }
 
   const [fetchComandsId, isLoading, errorLeaguesId] = useFetching(fetchComands);
@@ -78,7 +79,7 @@ const ComandsId: FC = () => {
   const BREADCRUMBS: IBreadcrumb[] = [
     {
       text: 'Команды',
-      link: '/comands',
+      link: '/commands',
     },
     {
       text: nameComandsId,
@@ -86,7 +87,7 @@ const ComandsId: FC = () => {
   ];
 
   return (
-    <Container className={cl(styles['leagues-id'])}>
+    <Container className={cl(styles['commands-id'])}>
       <Loading isLoading={isLoading} error={errorLeaguesId}>
         <Viewer
           onChange={setNumPage}
@@ -94,15 +95,15 @@ const ComandsId: FC = () => {
           defaultPageSize={LIMIT_COMANDS_MATCHES_PAGE}
           totalCountElem={leaguesIdLenght}
         >
-          <MyBreadcrumb className={cl(styles['leagues-id__breadcrumb'])} breadcrumbs={BREADCRUMBS} />
+          <MyBreadcrumb className={cl(styles['commands-id__breadcrumb'])} breadcrumbs={BREADCRUMBS} />
 
-          <Title className={cl(styles['leagues-id__title'])}>Матчи</Title>
+          <Title className={cl(styles['commands-id__title'])}>Матчи</Title>
 
-          <div className={cl(styles['leagues-id__block'])}>
+          <div className={cl(styles['commands-id__block'])}>
             <ConfigProvider locale={locale}>
               <DatePicker.RangePicker
-                className={cl(styles['leagues-id__range-picker'])}
-                dropdownClassName={cl(styles['leagues-id__range-picker-dropdown'])}
+                className={cl(styles['commands-id__range-picker'])}
+                dropdownClassName={cl(styles['commands-id__range-picker-dropdown'])}
                 onChange={moment => setDateRange(moment)}
               />
             </ConfigProvider>

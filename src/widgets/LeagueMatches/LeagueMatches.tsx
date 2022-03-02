@@ -15,10 +15,10 @@ interface LeagueMatchesProps {
 
 export const LeagueMatches: FC<LeagueMatchesProps> = ({ data, className }) => {
   return (
-    <div className={cl(className, styles['league-matches'])}>
+    <ul className={cl(className, styles['league-matches'])}>
       {data.map(item => (
         <MatchesItem key={item.id} data={item} />
       ))}
-    </div>
+    </ul>
   );
 };

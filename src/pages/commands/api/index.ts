@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ICommands } from '../model/types';
+import { ICommands, ICommandsId } from '../model/types';
 
 // Config
 import { INSTANCE_API } from '~shared/api';
@@ -13,17 +13,21 @@ export class CommandsAPI {
     return response.data;
   }
 
-  // получить все лиги
-  static async getCommandMatches(id: string) {
-    const response = await instance.get(`/teams/${id}/matches`);
+  // получить все матчи команды
+  static async getCommandId(id: string) {
+    const response = await instance.get<ICommandsId>(`/teams/${id}/matches`);
     return response.data;
   }
 
-  // получить все лиги из интервала дат
+  // получить имя команды
+  static async getCommandNameId(id: string) {
+    const response = await instance.get(`/teams/${id}`);
+    return response.data.name;
+  }
+
+  // получить все матчи команды из интервала дат
   static async getComandsIdDateRange(id: string, dateStart: string, dateEnd: string) {
-    const response = await instance.get(
-      `/teams/${id}/matches?dateFrom=${dateStart}&dateTo=${dateEnd}`
-    );
+    const response = await instance.get<ICommandsId>(`/teams/${id}/matches?dateFrom=${dateStart}&dateTo=${dateEnd}`);
     return response.data;
   }
 }

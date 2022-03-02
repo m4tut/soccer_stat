@@ -1,3 +1,22 @@
-.comands-id {
-  
+.commands-id {
+  & &__title {
+    font-size: 34px;
+    text-align: start;
+    margin-bottom: 10px;
+  }
+
+  & &__breadcrumb {
+    text-align: start;
+    margin-bottom: 8px;
+  }
+
+  &__block {
+    display: flex;
+  }
+
+  & &__range-picker {
+    width: 300px;
+    text-align: center;
+    margin-bottom: 14px;
+  }
 }

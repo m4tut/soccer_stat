@@ -29,7 +29,7 @@ export const MatchesItem: FC<MatchesItemProps> = ({ className, data }) => {
   const date = new Date(data.utcDate);
 
   return (
-    <div className={cl(className, styles['matches-item'])}>
+    <li className={cl(className, styles['matches-item'])}>
       <time className={cl(styles['matches-item__time'])} dateTime={data.utcDate}>
         {date.toLocaleString('ru', { year: 'numeric', month: '2-digit', day: '2-digit' }) +
           ' ' +
@@ -77,6 +77,6 @@ export const MatchesItem: FC<MatchesItemProps> = ({ className, data }) => {
           ''
         )}
       </div>
-    </div>
+    </li>
   );
 };
