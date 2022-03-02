@@ -1,3 +1,5 @@
+import { IMatchesData } from "~entities/MatchesItem/model/types";
+
 export interface ICommandsData {
   id: number;
   name: string;

@@ -5,6 +5,7 @@ import { IRoutes, IRoutesRedirect } from './types';
 const Leagues = lazy(() => import('~pages/leagues'));
 const LeaguesId = lazy(() => import('~pages/leagues/leaguesId'));
 const Commands = lazy(() => import('~pages/commands'));
+const ComandsId = lazy(() => import('~pages/commands/comandsId'));
 
 export const routes: IRoutes[] = [
   {
@@ -18,6 +19,10 @@ export const routes: IRoutes[] = [
   {
     path: '/commands',
     elements: Commands,
+  },
+  {
+    path: '/commands/:id',
+    elements: ComandsId,
   },
 ];
 

@@ -2,11 +2,11 @@ import { FC, useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router';
 
 // API
-import { LeaguesAPI } from '../api';
+import { CommandsAPI } from '../api';
 
 // Config
 import { IMatchesData } from '~entities/MatchesItem/model/types';
-import { LIMIT_LEAGUES_MATCHES_PAGE } from '../model/constants';
+import { LIMIT_COMANDS_MATCHES_PAGE } from '../model/constants';
 import { RangeValue } from 'rc-picker/lib/interface';
 import { Moment } from 'moment';
 
@@ -16,7 +16,7 @@ import usePagination from '~shared/hooks/usePagination';
 
 // Styles
 import cl from 'classnames';
-import styles from './leaguesId.module.scss';
+import styles from './comandsId.module.scss';
 
 // Components
 import { Container } from '~shared/layout/Container';
@@ -32,27 +32,26 @@ import { ConfigProvider, DatePicker } from 'antd';
 import 'moment/locale/ru';
 import locale from 'antd/lib/locale/ru_RU';
 
-const LeaguesId: FC = () => {
+const ComandsId: FC = () => {
   const { id = '' } = useParams<{ id: string }>();
-
-  const [leaguesId, setLeaguesId] = useState<IMatchesData[]>([]); // матчи лиги
-  const [nameLeaguesId, setNameLeaguesId] = useState<string>(''); // название лиги
+  const [comandsId, setComandsId] = useState<IMatchesData[]>([]); // матчи команды
+  const [nameComandsId, setNameComandsId] = useState<string>(''); // название лиги
   const [dateRange, setDateRange] = useState<RangeValue<Moment>>(); // состояние RangePicker
   const [page, leaguesIdLenght, numPage, setNumPage, fetchMatchesPage] =
-    usePagination<IMatchesData>(LIMIT_LEAGUES_MATCHES_PAGE);
+    usePagination<IMatchesData>(LIMIT_COMANDS_MATCHES_PAGE);
 
   // получить матчи конкретной лиги
-  async function fetchLeagues() {
-    const data = await LeaguesAPI.getLeaguesId(id);
-    setLeaguesId(data.matches);
+  async function fetchComands() {
+    const data = await CommandsAPI.getCommandMatches(id);
+    setComandsId(data.matches);
     fetchMatchesPage(data.matches);
-    setNameLeaguesId(data.competition.name);
+    // setNameComandsId(data.competition.name);
   }
 
-  const [fetchLeaguesId, isLoading, errorLeaguesId] = useFetching(fetchLeagues);
+  const [fetchComandsId, isLoading, errorLeaguesId] = useFetching(fetchComands);
 
   useEffect(() => {
-    fetchLeaguesId();
+    fetchComandsId();
   }, []);
 
   useMemo(async () => {
@@ -61,10 +60,10 @@ const LeaguesId: FC = () => {
       dateEnd: dateRange?.[1]?.format('YYYY-MM-DD'),
     };
 
-    let data = leaguesId;
+    let data = comandsId;
 
     if (dateRangeObj.dateStart !== undefined && dateRangeObj.dateEnd !== undefined) {
-      const dateRange = await LeaguesAPI.getLeaguesIdDateRange(id, dateRangeObj.dateStart, dateRangeObj.dateEnd);
+      const dateRange = await CommandsAPI.getComandsIdDateRange(id, dateRangeObj.dateStart, dateRangeObj.dateEnd);
       data = dateRange.matches;
     }
 
@@ -78,11 +77,11 @@ const LeaguesId: FC = () => {
   // Constants
   const BREADCRUMBS: IBreadcrumb[] = [
     {
-      text: 'Лиги',
-      link: '/leagues',
+      text: 'Команды',
+      link: '/comands',
     },
     {
-      text: nameLeaguesId,
+      text: nameComandsId,
     },
   ];
 
@@ -92,7 +91,7 @@ const LeaguesId: FC = () => {
         <Viewer
           onChange={setNumPage}
           current={numPage + 1}
-          defaultPageSize={LIMIT_LEAGUES_MATCHES_PAGE}
+          defaultPageSize={LIMIT_COMANDS_MATCHES_PAGE}
           totalCountElem={leaguesIdLenght}
         >
           <MyBreadcrumb className={cl(styles['leagues-id__breadcrumb'])} breadcrumbs={BREADCRUMBS} />
@@ -115,4 +114,4 @@ const LeaguesId: FC = () => {
   );
 };
 
-export default LeaguesId;
+export default ComandsId;

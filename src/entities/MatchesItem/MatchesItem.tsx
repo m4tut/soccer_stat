@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
 // Config
-import { ILeaguesMatchesData } from '~pages/leagues/model/types';
+import { IMatchesData } from './model/types';
 
 // Styles
 import cl from 'classnames';
@@ -21,7 +21,7 @@ const STATUS_MATCHES = {
 
 interface MatchesItemProps {
   className?: string;
-  data: ILeaguesMatchesData;
+  data: IMatchesData;
 }
 
 export const MatchesItem: FC<MatchesItemProps> = ({ className, data }) => {
